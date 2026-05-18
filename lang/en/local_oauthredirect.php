@@ -35,3 +35,4 @@ $string['issuerid_desc'] = 'Select the OAuth issuer to which the redirect should
 $string['missingissuer'] = 'Missing OAuth issuer id.';
 $string['none'] = 'None';
 $string['pluginname'] = 'OAuth Redirect';
+$string['privacy:metadata'] = 'The OAuth Redirect plugin does not store any personal data.';
