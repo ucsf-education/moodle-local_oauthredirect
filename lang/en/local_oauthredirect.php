@@ -34,5 +34,6 @@ $string['issuerid'] = 'Default OAuth issuer';
 $string['issuerid_desc'] = 'Select the OAuth issuer to which the redirect should point by default.';
 $string['missingissuer'] = 'Missing OAuth issuer id.';
 $string['none'] = 'None';
+$string['oauthredirect:manage'] = 'Manage OAuth Redirect settings';
 $string['pluginname'] = 'OAuth Redirect';
 $string['privacy:metadata'] = 'The OAuth Redirect plugin does not store any personal data.';
