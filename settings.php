@@ -39,10 +39,35 @@ if ($hassiteconfig) {
 
     $settingoptions = [0 => get_string('none')] + $settingoptions;
 
-    $settings->add(new admin_setting_configselect(
+    $redirecturl = $CFG->wwwroot . '/local/oauthredirect/redirect.php';
+
+    $alternateloginsettingsurl = (new moodle_url(
+        '/admin/settings.php',
+        ['section' => 'manageauths']
+    ))->out(false) . '#admin-alternateloginurl';
+
+    $testsettingsurl = (new moodle_url('/auth/test_settings.php', ['auth' => 'oauth2']))->out(false);
+
+    $warningdata = (object) [
+        'redirecturl' => $redirecturl,
+        'settingsurl' => $alternateloginsettingsurl,
+    ];
+
+    $issuerdescdata = (object) [
+        'settingsurl' => $alternateloginsettingsurl,
+        'testsettingsurl' => $testsettingsurl,
+    ];
+
+    $settings->add(new admin_setting_heading(
+        'local_oauthredirect/autoredirectwarning',
+        get_string('alternateloginurlinstructions', 'local_oauthredirect'),
+        get_string('alternateloginurlwarning', 'local_oauthredirect', $warningdata)
+    ));
+
+    $settings->add(new \local_oauthredirect\issuerid(
         'local_oauthredirect/issuerid',
         get_string('issuerid', 'local_oauthredirect'),
-        get_string('issuerid_desc', 'local_oauthredirect'),
+        get_string('issuerid_desc', 'local_oauthredirect', $issuerdescdata),
         0,
         $settingoptions
     ));

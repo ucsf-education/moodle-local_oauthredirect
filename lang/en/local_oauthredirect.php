@@ -25,13 +25,15 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+$string['alternateloginurlinstructions'] = 'Select a valid OAuth issuer below to enable automatic OAuth redirection for this site.';
+$string['alternateloginurlwarning'] = '⚠️ <strong>CRITICAL WARNING:</strong> Saving this page with a valid issuer will automatically set Moodle’s <a href="{$a->settingsurl}" target="_blank" rel="noreferrer noopener">alternate login URL</a> to <em>{$a->redirecturl}</em>. <br>Verify the redirect carefully before saving — <strong>an invalid issuer or an incorrect URL can LOCK OUT ALL USERS from this site.</strong>';
 $string['include_sesskey'] = 'Include sesskey';
 $string['include_sesskey_desc'] = 'If enabled, the current session sesskey will be appended to the OAuth redirect URL.';
 $string['include_wantsurl'] = 'Include wantsurl';
 $string['include_wantsurl_desc'] = 'If enabled, wantsurl will be added to the redirect from ?wantsurl= or a default value.';
 $string['invalidissuer'] = 'OAuth issuer with id {$a} not found.';
 $string['issuerid'] = 'Default OAuth issuer';
-$string['issuerid_desc'] = 'Select the OAuth issuer to which the redirect should point by default.';
+$string['issuerid_desc'] = 'Select the OAuth issuer to which the redirect should point by default. Saving this setting with a valid issuer automatically updates Moodle’s <a href="{$a->settingsurl}" target="_blank" rel="noreferrer noopener">alternate login URL</a> to the redirect page. Please test the OAuth 2 settings on <a href="{$a->testsettingsurl}" target="_blank" rel="noreferrer noopener">the OAuth 2 test settings page</a> first before saving.';
 $string['missingissuer'] = 'Missing OAuth issuer id.';
 $string['none'] = 'None';
 $string['oauthredirect:manage'] = 'Manage OAuth Redirect settings';
