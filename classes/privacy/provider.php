@@ -16,8 +16,6 @@
 
 namespace local_oauthredirect\privacy;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Privacy provider.
  *

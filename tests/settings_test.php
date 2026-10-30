@@ -14,10 +14,23 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-defined('MOODLE_INTERNAL') || die();
+/**
+ * Tests for the OAuth redirect plugin settings.
+ *
+ * @package    local_oauthredirect
+ * @copyright  (c) The Regents of the University of California
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 
-class settings_test extends advanced_testcase {
-
+/**
+ * Tests for the issuer ID setting.
+ *
+ * @covers \local_oauthredirect\issuerid
+ */
+final class settings_test extends advanced_testcase {
+    /**
+     * Test that selecting a valid issuer updates the alternate login URL.
+     */
     public function test_write_setting_updates_alternateloginurl_when_valid_issuer_selected(): void {
         global $CFG;
         require_once($CFG->libdir . '/adminlib.php');
@@ -46,6 +59,9 @@ class settings_test extends advanced_testcase {
         }
     }
 
+    /**
+     * Test that selecting no issuer leaves the alternate login URL unchanged.
+     */
     public function test_write_setting_does_not_change_alternateloginurl_when_none_selected(): void {
         global $CFG;
         require_once($CFG->libdir . '/adminlib.php');

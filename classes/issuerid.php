@@ -16,15 +16,14 @@
 
 namespace local_oauthredirect;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * OAuth issuer select that automatically updates alternateloginurl on save.
  *
  * @package    local_oauthredirect
+ * @copyright  (c) The Regents of the University of California
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class issuerid extends \admin_setting_configselect {
-
     /**
      * Save the issuer setting and update Moodle's Alternate login URL when valid.
      *
