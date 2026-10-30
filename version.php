@@ -26,7 +26,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_oauthredirect';
-$plugin->version = 2026031100;
+$plugin->version = 2026103000;
 $plugin->requires = 2022112800;
 $plugin->maturity = MATURITY_STABLE;
 $plugin->release = 'v1.0';

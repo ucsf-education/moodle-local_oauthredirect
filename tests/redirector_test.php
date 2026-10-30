@@ -93,4 +93,54 @@ final class redirector_test extends \advanced_testcase {
         $this->assertArrayHasKey('sesskey', $params);
         $this->assertNotEmpty($params['sesskey']);
     }
+
+    /**
+     * Test that an explicit param takes precedence over the session value.
+     *
+     * @return void
+     */
+    public function test_resolve_wantsurl_prefers_explicit_param(): void {
+        $result = redirector::resolve_wantsurl('/course/view.php?id=5', '/other/page.php');
+        $this->assertEquals('/course/view.php?id=5', $result);
+    }
+
+    /**
+     * Test that the session value is used when no param is supplied.
+     *
+     * @return void
+     */
+    public function test_resolve_wantsurl_falls_back_to_session(): void {
+        $result = redirector::resolve_wantsurl('', '/course/view.php?id=5');
+        $this->assertEquals('/course/view.php?id=5', $result);
+    }
+
+    /**
+     * Test that an external session URL is rejected and '/' is returned.
+     *
+     * @return void
+     */
+    public function test_resolve_wantsurl_rejects_external_session_url(): void {
+        $result = redirector::resolve_wantsurl('', 'https://evil.example.com/steal');
+        $this->assertEquals('/', $result);
+    }
+
+    /**
+     * Test that '/' is returned when both param and session are absent.
+     *
+     * @return void
+     */
+    public function test_resolve_wantsurl_defaults_to_root(): void {
+        $result = redirector::resolve_wantsurl('', null);
+        $this->assertEquals('/', $result);
+    }
+
+    /**
+     * Test that '/' is returned when the session value is an empty string.
+     *
+     * @return void
+     */
+    public function test_resolve_wantsurl_defaults_to_root_on_empty_session(): void {
+        $result = redirector::resolve_wantsurl('', '');
+        $this->assertEquals('/', $result);
+    }
 }

@@ -58,4 +58,29 @@ class redirector {
 
         return new \moodle_url('/auth/oauth2/login.php', $params);
     }
+
+    /**
+     * Resolve the wantsurl to use in the OAuth redirect.
+     *
+     * Prefers an explicitly supplied param value, falls back to the session
+     * value (validated as a local URL), then falls back to '/'.
+     *
+     * @param string $paramwantsurl Already-cleaned value from the request param ('' if absent).
+     * @param string|null $sessionwantsurl Raw value from $SESSION->wantsurl (null if absent).
+     * @return string
+     */
+    public static function resolve_wantsurl(string $paramwantsurl, ?string $sessionwantsurl): string {
+        if ($paramwantsurl !== '') {
+            return $paramwantsurl;
+        }
+
+        if (!empty($sessionwantsurl)) {
+            $cleaned = clean_param($sessionwantsurl, PARAM_LOCALURL);
+            if ($cleaned !== '') {
+                return $cleaned;
+            }
+        }
+
+        return '/';
+    }
 }

@@ -37,7 +37,10 @@ $issuerid = optional_param('issuerid', $defaultissuerid, PARAM_INT);
 
 $wantsurl = null;
 if ($includewantsurl) {
-    $wantsurl = optional_param('wantsurl', '/', PARAM_LOCALURL);
+    $wantsurl = \local_oauthredirect\redirector::resolve_wantsurl(
+        optional_param('wantsurl', '', PARAM_LOCALURL),
+        $SESSION->wantsurl ?? null
+    );
 }
 
 $omitsskey = optional_param('omit_sesskey', 0, PARAM_BOOL);
