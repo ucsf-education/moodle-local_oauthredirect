@@ -37,20 +37,10 @@ $issuerid = optional_param('issuerid', $defaultissuerid, PARAM_INT);
 
 $wantsurl = null;
 if ($includewantsurl) {
-    // Prefer an explicitly supplied wantsurl.
-    $wantsurl = optional_param('wantsurl', '', PARAM_LOCALURL);
-
-    // When Moodle redirects to an alternate login URL, the original
-    // destination is normally stored in the session rather than passed
-    // as a query parameter.
-    if ($wantsurl === '' && !empty($SESSION->wantsurl)) {
-        $wantsurl = clean_param($SESSION->wantsurl, PARAM_LOCALURL);
-    }
-
-    // Fall back to the site root if no valid destination is available.
-    if ($wantsurl === '') {
-        $wantsurl = '/';
-    }
+    $wantsurl = \local_oauthredirect\redirector::resolve_wantsurl(
+        optional_param('wantsurl', '', PARAM_LOCALURL),
+        $SESSION->wantsurl ?? null
+    );
 }
 
 $omitsskey = optional_param('omit_sesskey', 0, PARAM_BOOL);
